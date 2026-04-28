@@ -13,14 +13,15 @@ async function main() {
   }
 
   const config: AgentConfig = {
-    llmProvider: (process.env.LLM_PROVIDER as "openai" | "anthropic") ?? "openai",
-    llmModel: process.env.LLM_MODEL ?? "gpt-4o",
+    llmProvider: (process.env.LLM_PROVIDER as "openai" | "anthropic" | "deepseek") ?? "deepseek",
+    llmModel: process.env.LLM_MODEL ?? "deepseek-chat",
     headless: process.env.HEADLESS === "true",
     maxRetries: DEFAULTS.MAX_RETRIES,
     maxSteps: DEFAULTS.MAX_STEPS,
     sessionDir: process.env.SESSION_DIR ?? DEFAULTS.SESSION_DIR,
     openaiApiKey: process.env.OPENAI_API_KEY,
     anthropicApiKey: process.env.ANTHROPIC_API_KEY,
+    deepseekApiKey: process.env.DEEPSEEK_API_KEY,
   };
 
   const task: AgentTask = {

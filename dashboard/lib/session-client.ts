@@ -1,5 +1,4 @@
-import type { SessionManifest } from "../../shared/types.js";
-import type { SessionData } from "../../recorder/session-store.js";
+import type { SessionManifest, SessionData } from "./types";
 
 const BASE = "/api";
 
@@ -16,9 +15,7 @@ export async function fetchSession(id: string): Promise<SessionData> {
 }
 
 export async function deleteSession(id: string): Promise<boolean> {
-  const res = await fetch(`${BASE}/sessions?id=${encodeURIComponent(id)}`, {
-    method: "DELETE",
-  });
+  const res = await fetch(`${BASE}/sessions?id=${encodeURIComponent(id)}`, { method: "DELETE" });
   return res.ok;
 }
 
@@ -28,34 +25,13 @@ export function createReplayStream(
   onThought: (data: unknown) => void,
   onError: (err: Event) => void,
 ): EventSource {
-  const es = new EventSource(
-    `/api/replay?sessionId=${encodeURIComponent(sessionId)}`,
-  );
-
-  es.addEventListener("action", (e) => {
-    try {
-      onAction(JSON.parse(e.data));
-    } catch { /* malformed data */ }
-  });
-
-  es.addEventListener("thought", (e) => {
-    try {
-      onThought(JSON.parse(e.data));
-    } catch { /* malformed data */ }
-  });
-
+  const es = new EventSource(`/api/replay?sessionId=${encodeURIComponent(sessionId)}`);
+  es.addEventListener("action", (e) => { try { onAction(JSON.parse(e.data)); } catch { /* skip */ } });
+  es.addEventListener("thought", (e) => { try { onThought(JSON.parse(e.data)); } catch { /* skip */ } });
   es.onerror = onError;
   return es;
 }
 
-export async function sendIntervention(
-  sessionId: string,
-  command: string,
-  message?: string,
-): Promise<void> {
-  await fetch("/api/intervene", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ sessionId, command, message }),
-  });
+export async function sendIntervention(sessionId: string, command: string, message?: string): Promise<void> {
+  await fetch("/api/intervene", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId, command, message }) });
 }

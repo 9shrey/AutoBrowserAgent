@@ -111,8 +111,8 @@ export type Frame = z.infer<typeof Frame>;
 // ─── Config ────────────────────────────────────────────────
 
 export const AgentConfig = z.object({
-  llmProvider: z.enum(["openai", "anthropic"]).default("openai"),
-  llmModel: z.string().default("gpt-4o"),
+  llmProvider: z.enum(["openai", "anthropic", "deepseek"]).default("deepseek"),
+  llmModel: z.string().default("deepseek-chat"),
   headless: z.boolean().default(false),
   maxRetries: z.number().default(3),
   maxSteps: z.number().default(50),
@@ -120,6 +120,7 @@ export const AgentConfig = z.object({
   browserbaseApiKey: z.string().optional(),
   openaiApiKey: z.string().optional(),
   anthropicApiKey: z.string().optional(),
+  deepseekApiKey: z.string().optional(),
 });
 export type AgentConfig = z.infer<typeof AgentConfig>;
 

@@ -8,6 +8,23 @@ import { captureScreenshot, captureDOMSnapshot, getPageContext } from "./vision.
 import { validateAction } from "./tools.js";
 import { SessionRecorder } from "../recorder/recorder.js";
 
+async function extractPageText(page: Page): Promise<string> {
+  try {
+    return await page.evaluate(() => {
+      const body = document.body;
+      if (!body) return "";
+      // Remove script, style, nav, footer
+      const clone = body.cloneNode(true) as HTMLElement;
+      clone.querySelectorAll("script, style, nav, footer, iframe, svg, [aria-hidden='true']").forEach((el) => el.remove());
+      const text = clone.innerText || clone.textContent || "";
+      // Collapse whitespace
+      return text.replace(/\s+/g, " ").trim().slice(0, 6000);
+    });
+  } catch {
+    return "";
+  }
+}
+
 export class AgentOrchestrator {
   private config: AgentConfig;
   private task: AgentTask;
@@ -61,6 +78,9 @@ export class AgentOrchestrator {
         pageContext.title,
       );
 
+      // Extract page text for text-based LLMs (DeepSeek, etc.)
+      const pageText = await extractPageText(this.page);
+
       // 2. PLAN — LLM decides next action
       console.log(`[Step ${stepNumber}] Planning next action...`);
 
@@ -77,6 +97,7 @@ export class AgentOrchestrator {
         stepNumber,
         maxSteps,
         this.previousActions,
+        pageText,
       );
       await this.recorder.recordThought(thought);
       console.log(
