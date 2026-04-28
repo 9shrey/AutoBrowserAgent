@@ -28,6 +28,8 @@ export class SessionRecorder {
       path.join(this.sessionDir, "actions.jsonl"),
       "",
     );
+    // Use the directory name (with date) as the canonical session ID
+    this.sessionId = path.basename(this.sessionDir);
   }
 
   async ensureFrameDir(step: number): Promise<string> {

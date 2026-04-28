@@ -11,7 +11,9 @@ export async function listSessions(sessionDir: string): Promise<SessionManifest[
       const manifestPath = path.join(sessionDir, entry.name, "manifest.json");
       try {
         const raw = await fs.readFile(manifestPath, "utf-8");
-        manifests.push(JSON.parse(raw) as SessionManifest);
+        const m = JSON.parse(raw) as SessionManifest;
+        m.id = entry.name; // Use directory name as canonical ID
+        manifests.push(m);
       } catch { /* skip */ }
     }
   } catch { /* dir doesn't exist */ }

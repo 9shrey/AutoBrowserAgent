@@ -23,6 +23,7 @@ const styles: Styles = {
   loading: { display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", color: "#8b949e", fontSize: 16 },
 };
 
+
 export default function SessionReplay() {
   const router = useRouter();
   const { id } = router.query;
@@ -30,17 +31,25 @@ export default function SessionReplay() {
   const [loading, setLoading] = useState(true);
   const [currentStep, setCurrentStep] = useState(1);
   const [showArtifacts, setShowArtifacts] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!id) return;
-    fetch(`/api/sessions?id=${id}`)
+    if (!router.isReady) return;
+    if (!id || typeof id !== "string") return;
+    fetch(`/api/sessions?id=${encodeURIComponent(id)}`)
       .then((r) => r.json())
-      .then((data) => { setSession(data); setLoading(false); })
-      .catch((err) => { console.error("Failed to load session:", err); setLoading(false); });
-  }, [id]);
+      .then((data) => {
+        if (data.error) { setError(data.error); return; }
+        if (!data.manifest) { setError("Session data is incomplete"); return; }
+        setSession(data);
+      })
+      .catch((err) => { setError(err.message); })
+      .finally(() => { setLoading(false); });
+  }, [router.isReady, id]);
 
   if (loading) return <div style={styles.loading}>Loading session...</div>;
-  if (!session) return <div style={styles.loading}>Session not found</div>;
+  if (error) return <div style={styles.loading}>Error: {error}</div>;
+  if (!session || !session.manifest) return <div style={styles.loading}>Session not found</div>;
 
   const thoughts = session.thoughts || [];
   const actions = session.actions || [];
