@@ -1,0 +1,20 @@
+[
+  {
+    "company": "Northstar AI",
+    "role": "Junior ML Engineer",
+    "location": "Remote US",
+    "fit": "Python, sklearn, MLflow"
+  },
+  {
+    "company": "MetricOps",
+    "role": "MLOps Associate",
+    "location": "Remote",
+    "fit": "CI/CD, monitoring, Docker"
+  },
+  {
+    "company": "BrowserStack Labs",
+    "role": "AI Agent Engineer",
+    "location": "Hybrid",
+    "fit": "Playwright, TypeScript"
+  }
+]

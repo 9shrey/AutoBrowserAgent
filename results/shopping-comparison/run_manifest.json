@@ -1,0 +1,20 @@
+{
+  "id": "shopping-comparison",
+  "task": "Compare three espresso grinders under $500 and export a table",
+  "status": "completed",
+  "startedAt": "2026-05-04T00:00:00.000Z",
+  "finishedAt": "2026-05-04T00:01:38.000Z",
+  "durationMs": 98000,
+  "totalSteps": 6,
+  "llmProvider": "offline-fixture",
+  "llmModel": "scripted",
+  "artifacts": [
+    "artifacts/comparison.csv",
+    "artifacts/comparison.json"
+  ],
+  "tags": [
+    "shopping",
+    "comparison",
+    "offline-fixture"
+  ]
+}

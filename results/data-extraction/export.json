@@ -1,0 +1,20 @@
+[
+  {
+    "plan": "Starter",
+    "price": "$19",
+    "seats": "3",
+    "notes": "basic automation"
+  },
+  {
+    "plan": "Growth",
+    "price": "$79",
+    "seats": "15",
+    "notes": "team replay and exports"
+  },
+  {
+    "plan": "Scale",
+    "price": "custom",
+    "seats": "unlimited",
+    "notes": "SAML and audit logs"
+  }
+]

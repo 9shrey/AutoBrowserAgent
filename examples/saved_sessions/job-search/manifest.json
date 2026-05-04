@@ -1,0 +1,19 @@
+{
+  "id": "job-search",
+  "task": "Find three remote junior ML engineer roles and export application notes",
+  "status": "completed",
+  "startedAt": "2026-05-04T00:00:00.000Z",
+  "finishedAt": "2026-05-04T00:01:38.000Z",
+  "durationMs": 98000,
+  "totalSteps": 6,
+  "llmProvider": "offline-fixture",
+  "llmModel": "scripted",
+  "artifacts": [
+    "artifacts/export.csv",
+    "artifacts/export.json"
+  ],
+  "tags": [
+    "job-search",
+    "offline-fixture"
+  ]
+}
