@@ -1,0 +1,19 @@
+{
+  "id": "data-extraction",
+  "task": "Extract pricing tiers from a SaaS pricing page",
+  "status": "completed",
+  "startedAt": "2026-05-04T00:00:00.000Z",
+  "finishedAt": "2026-05-04T00:01:38.000Z",
+  "durationMs": 98000,
+  "totalSteps": 6,
+  "llmProvider": "offline-fixture",
+  "llmModel": "scripted",
+  "artifacts": [
+    "artifacts/export.csv",
+    "artifacts/export.json"
+  ],
+  "tags": [
+    "data-extraction",
+    "offline-fixture"
+  ]
+}

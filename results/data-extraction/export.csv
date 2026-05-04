@@ -1,0 +1,4 @@
+plan,price,seats,notes
+"Starter","$19","3","basic automation"
+"Growth","$79","15","team replay and exports"
+"Scale","custom","unlimited","SAML and audit logs"

@@ -1,0 +1,23 @@
+[
+  {
+    "product": "Baratza Encore ESP",
+    "price": "$199",
+    "burr": "40mm conical",
+    "score": 8.8,
+    "reason": "Best value"
+  },
+  {
+    "product": "Fellow Opus",
+    "price": "$195",
+    "burr": "40mm conical",
+    "score": 8.4,
+    "reason": "Quiet, compact"
+  },
+  {
+    "product": "DF54",
+    "price": "$229",
+    "burr": "54mm flat",
+    "score": 8.7,
+    "reason": "Strong espresso clarity"
+  }
+]

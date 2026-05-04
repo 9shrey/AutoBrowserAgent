@@ -1,0 +1,6 @@
+{"step":1,"action":"navigate","target":"https://example.local/search?q=espresso+grinder","result":"success"}
+{"step":2,"action":"extract","target":"search results","result":"3 product pages queued"}
+{"step":3,"action":"navigate","target":"review page A","result":"success"}
+{"step":4,"action":"extract","target":"product specs","result":"Baratza Encore ESP captured"}
+{"step":5,"action":"extract","target":"comparison table","result":"3 rows captured"}
+{"step":6,"action":"done","target":"task","result":"artifacts exported"}

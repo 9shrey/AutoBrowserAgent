@@ -12,6 +12,26 @@
 
 ## Architecture
 
+See [`docs/architecture.md`](docs/architecture.md). Visual flow:
+
+```mermaid
+flowchart LR
+    Task["Natural-language task"] --> Loop["Agent loop<br/>perceive, plan, act, evaluate"]
+    Loop --> Planner["LLM planner"]
+    Loop --> Executor["Playwright executor"]
+    Executor --> Recorder["Session recorder"]
+    Recorder --> Dashboard["Replay dashboard"]
+    Recorder --> Artifacts["CSV / JSON artifacts"]
+    Dashboard --> Human["Human intervention"]
+    Human --> Loop
+```
+
+Replay dashboard fixture:
+
+![Replay dashboard fixture](results/shopping-comparison/replay_dashboard.svg)
+
+Legacy ASCII overview:
+
 ```
 User Task (NL)
     │
@@ -105,6 +125,25 @@ npx tsx demo/headphone-research.ts
 ```
 
 This runs a scripted demo that searches for noise-canceling headphones, visits review sites, and builds a comparison CSV/JSON — all without an LLM API key.
+
+### Reproduce in 5 Minutes
+
+```bash
+node examples/offline_replay_fixture.mjs
+```
+
+This creates a no-network replay fixture and exported artifacts:
+
+| artifact | purpose |
+|---|---|
+| [`examples/saved_sessions/shopping-comparison/manifest.json`](examples/saved_sessions/shopping-comparison/manifest.json) | saved session metadata |
+| [`examples/saved_sessions/shopping-comparison/actions.jsonl`](examples/saved_sessions/shopping-comparison/actions.jsonl) | action timeline |
+| [`examples/saved_sessions/shopping-comparison/thoughts.jsonl`](examples/saved_sessions/shopping-comparison/thoughts.jsonl) | planner reasoning fixture |
+| [`results/shopping-comparison/comparison.csv`](results/shopping-comparison/comparison.csv) | exported CSV artifact |
+| [`results/shopping-comparison/comparison.json`](results/shopping-comparison/comparison.json) | exported JSON artifact |
+| [`results/shopping-comparison/replay_dashboard.svg`](results/shopping-comparison/replay_dashboard.svg) | replay dashboard screenshot fixture |
+| [`examples/saved_sessions/job-search/`](examples/saved_sessions/job-search/) | second saved session fixture |
+| [`examples/saved_sessions/data-extraction/`](examples/saved_sessions/data-extraction/) | third saved session fixture |
 
 ### Replay Dashboard
 
@@ -202,6 +241,14 @@ AutoBrowserAgent/
 | Session Storage | Filesystem (JSONL + JPEG) with S3-ready abstraction |
 | Replay | Timeline scrubber, filmstrip, thought bubbles |
 | Intervention | REST API (pause/redirect/resume/takeover) |
+
+## Limitations
+
+- Real websites are brittle: DOM changes, popups, consent screens, and lazy loading can break planned actions.
+- CAPTCHA, login, MFA, and paywalls are intentionally not bypassed.
+- LLM-planned actions can be wrong or hallucinated; the executor must keep safety checks and retry limits.
+- Cost and latency depend on provider, model, page length, and screenshot usage.
+- The committed fixture is offline and scripted; it proves session/replay artifact shape, not full autonomous browsing quality.
 
 ## ATS Keywords
 

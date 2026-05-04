@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="AutoBrowserAgent replay dashboard screenshot">
+  <rect width="960" height="540" fill="#0b1020"/>
+  <rect x="24" y="24" width="220" height="492" rx="8" fill="#111827" stroke="#263244"/>
+  <rect x="268" y="24" width="668" height="340" rx="8" fill="#f8fafc"/>
+  <rect x="268" y="388" width="668" height="128" rx="8" fill="#111827" stroke="#263244"/>
+  <text x="44" y="62" fill="#e5e7eb" font-family="Arial" font-size="20">Filmstrip</text>
+  <text x="292" y="62" fill="#0f172a" font-family="Arial" font-size="22">Replay Viewport</text>
+  <text x="292" y="426" fill="#e5e7eb" font-family="Arial" font-size="18">Thought: all requested columns are present; export CSV and JSON.</text>
+  <g fill="#38bdf8">
+    <rect x="44" y="92" width="176" height="54" rx="6"/>
+    <rect x="44" y="162" width="176" height="54" rx="6" opacity="0.7"/>
+    <rect x="44" y="232" width="176" height="54" rx="6" opacity="0.45"/>
+  </g>
+  <g fill="#0f172a" font-family="Arial" font-size="16">
+    <text x="308" y="128">Product</text><text x="540" y="128">Price</text><text x="670" y="128">Score</text>
+    <text x="308" y="172">Baratza Encore ESP</text><text x="540" y="172">$199</text><text x="670" y="172">8.8</text>
+    <text x="308" y="216">Fellow Opus</text><text x="540" y="216">$195</text><text x="670" y="216">8.4</text>
+    <text x="308" y="260">DF54</text><text x="540" y="260">$229</text><text x="670" y="260">8.7</text>
+  </g>
+</svg>
